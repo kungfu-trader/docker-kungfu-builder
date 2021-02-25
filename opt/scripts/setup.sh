@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
@@ -8,7 +10,7 @@ $INSTALL centos-release-scl
 
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
-curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+curl -sSL https://rpm.nodesource.com/setup_10.x | bash -
 
 $INSTALL awscli \
          cmake3 \
@@ -18,7 +20,7 @@ $INSTALL awscli \
          make \
          nodejs \
          rpm-build \
-         wget \
+         xz \
          openssl-devel \
          bzip2-devel \
          libffi-devel \
@@ -39,8 +41,9 @@ ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 mkdir /tmp/code
 cd /tmp/code
-wget --no-verbose https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz -o python.tgz
-tar xzf python.tgz
+curl -sSL -o python.tar.xz https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
+ls -l
+tar -xf python.tar.xz
 cd python
 ./configure --with-ensurepip=install --enable-optimizations --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 make install
