@@ -3,37 +3,37 @@
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
+$INSTALL http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
+$INSTALL centos-release-scl
+
+yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
+
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
 
-$INSTALL http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
-
-$INSTALL git \
-         sudo \
-         rpm-build \
+$INSTALL awscli \
+         cmake3 \
+         devtoolset-9 \
+         git \
+         kde-l10n-Chinese \
          make \
+         nodejs \
+         rpm-build \
+         wget \
          openssl-devel \
          bzip2-devel \
          libffi-devel \
          xz-devel \
          readline-devel \
          sqlite-devel \
-         zlib-devel \
-         wget \
-         cmake3 \
-         nodejs \
-         centos-release-scl
+         zlib-devel
 
-ln -s /usr/bin/cmake3 /usr/bin/cmake
-
-yum-config-manager --enable centos-sclo-rh-testing
-yum-config-manager --enable centos-sclo-sclo-testing
-
-$INSTALL devtoolset-9
+$REINSTALL glibc-common
+localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 
 echo "source /opt/rh/devtoolset-9/enable" >> /etc/profile
-echo "source /opt/rh/devtoolset-9/enable" >> ~/.bashrc
+echo "source /opt/rh/devtoolset-9/enable" >> /etc/bashrc
 
-source ~/.bashrc
+ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 mkdir /tmp/python
 cd /tmp/python
@@ -44,10 +44,6 @@ cd Python-3.7.7
 make install
 cd /
 rm -rf /tmp/python
-
-$INSTALL kde-l10n-Chinese
-$REINSTALL glibc-common
-localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 
 pip3 install pipenv==2020.11.15
 
