@@ -1,6 +1,13 @@
 #!/bin/bash
 
-yum -y install git \
+INSTALL="yum -y install"
+REINSTALL="yum -y reinstall"
+
+curl -sL https://rpm.nodesource.com/setup_10.x | bash -
+
+$INSTALL http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
+
+$INSTALL git \
          sudo \
          rpm-build \
          make \
@@ -12,12 +19,16 @@ yum -y install git \
          sqlite-devel \
          zlib-devel \
          wget \
+         cmake3 \
+         nodejs \
          centos-release-scl
+
+ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 yum-config-manager --enable centos-sclo-rh-testing
 yum-config-manager --enable centos-sclo-sclo-testing
 
-yum install -y devtoolset-9
+$INSTALL devtoolset-9
 
 echo "source /opt/rh/devtoolset-9/enable" >> /etc/profile
 echo "source /opt/rh/devtoolset-9/enable" >> ~/.bashrc
@@ -34,15 +45,9 @@ make install
 cd /
 rm -rf /tmp/python
 
-curl -sL https://rpm.nodesource.com/setup_10.x | bash - && yum -y install nodejs
-
-yum install -y kde-l10n-Chinese
-yum reinstall -y glibc-common
+$INSTALL kde-l10n-Chinese
+$REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
-
-yum install -y http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
-yum install -y cmake3
-ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 pip3 install pipenv==2020.11.15
 
