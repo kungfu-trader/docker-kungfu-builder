@@ -42,8 +42,8 @@ ln -s /usr/bin/cmake3 /usr/bin/cmake
 mkdir /tmp/code
 cd /tmp/code
 curl -sSL -o python.tar.xz https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
-ls -l
-tar -xf python.tar.xz
+mkdir python
+tar -xf python.tar.xz -C python
 cd python
 ./configure --with-ensurepip=install --enable-optimizations --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 make install
