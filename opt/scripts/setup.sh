@@ -2,6 +2,8 @@
 
 set -e
 
+PYTHON_VERSION="3.7.10"
+
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
@@ -41,10 +43,9 @@ ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 mkdir /tmp/code
 cd /tmp/code
-curl -sSL -o python.tar.xz https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tar.xz
-mkdir python
-tar -xf python.tar.xz -C python
-cd python
+curl -sSLO https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz
+tar -xf Python-$PYTHON_VERSION.tar.xz
+cd Python-$PYTHON_VERSION
 ./configure --with-ensurepip=install --enable-optimizations --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 make install
 cd /
