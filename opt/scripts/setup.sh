@@ -37,17 +37,14 @@ source /opt/rh/devtoolset-9/enable
 
 ln -s /usr/bin/cmake3 /usr/bin/cmake
 
-mkdir /tmp/python
-cd /tmp/python
-wget --no-verbose https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz
-tar xzf Python-3.7.7.tgz
-cd Python-3.7.7
+mkdir /tmp/code
+cd /tmp/code
+wget --no-verbose https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz -o python.tgz
+tar xzf python.tgz
+cd python
 ./configure --with-ensurepip=install --enable-optimizations --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
 make install
 cd /
-rm -rf /tmp/python
+rm -rf /tmp/code
 
 pip3 install pipenv==2020.11.15
-
-echo "127.0.0.1 local-test" >> /etc/hosts
-cat /etc/hosts
