@@ -27,19 +27,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-      - name: Build and Push - latest
-        id: docker-build-latest
-        uses: docker/build-push-action@v2
-        with:
-          push: ${{ github.ref == 'master' }}
-          tags: kungfutrader/kungfu-builder-centos:latest
-          labels: ${{ steps.docker-meta.outputs.labels }}
-      - name: Build and Push - tags
+      - name: Build and Push
         id: docker-build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ steps.docker-meta.outputs.tags }}
+          tags: kungfutrader/kungfu-builder-centos:latest, ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker-build.outputs.digest }}
