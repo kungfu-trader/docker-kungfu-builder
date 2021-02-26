@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Docker meta
-        id: docker_meta
+        id: docker-meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
           images: kungfutrader/kungfu-builder-centos
@@ -28,18 +28,18 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Build and Push - latest
-        id: docker_build
+        id: docker-build-latest
         uses: docker/build-push-action@v2
         with:
           push: ${{ github.ref == 'master' }}
           tags: kungfutrader/kungfu-builder-centos:latest
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
       - name: Build and Push - tags
-        id: docker_build
+        id: docker-build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
       - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        run: echo ${{ steps.docker-build.outputs.digest }}
