@@ -20,15 +20,15 @@ $INSTALL awscli \
          git \
          kde-l10n-Chinese \
          make \
-         nodejs \
+         nodejs-10.15.0-1nodesource \
          rpm-build \
          xz \
-         openssl-devel \
          bzip2-devel \
          libffi-devel \
-         xz-devel \
+         openssl-devel \
          readline-devel \
          sqlite-devel \
+         xz-devel \
          zlib-devel
 
 $REINSTALL glibc-common
@@ -38,8 +38,6 @@ echo "source /opt/rh/devtoolset-9/enable" >> /etc/profile
 echo "source /opt/rh/devtoolset-9/enable" >> /etc/bashrc
 
 source /opt/rh/devtoolset-9/enable
-
-ln -s /usr/bin/cmake3 /usr/bin/cmake
 
 mkdir /tmp/code
 cd /tmp/code
@@ -52,3 +50,8 @@ cd /
 rm -rf /tmp/code
 
 pip3 install pipenv==2020.11.15
+
+npm install -g yarn
+
+ln -s /usr/bin/cmake3 /usr/bin/cmake
+ln -s /usr/local/bin/python3 /usr/local/bin/python
