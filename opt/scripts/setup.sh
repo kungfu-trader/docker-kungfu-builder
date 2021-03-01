@@ -21,7 +21,10 @@ $INSTALL awscli \
          kde-l10n-Chinese \
          make \
          nodejs-10.15.0-1nodesource \
+         nmap \
          rpm-build \
+         tcpdump \
+         traceroute \
          xz \
          bzip2-devel \
          libffi-devel \
