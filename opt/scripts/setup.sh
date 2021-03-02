@@ -15,6 +15,7 @@ yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 curl -sSL https://rpm.nodesource.com/setup_10.x | bash -
 
 $INSTALL awscli \
+         bind-utils \
          cmake3 \
          devtoolset-9 \
          git \
