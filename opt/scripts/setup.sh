@@ -12,7 +12,7 @@ $INSTALL centos-release-scl
 
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
-curl -sSL https://rpm.nodesource.com/setup_10.x | bash -
+curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
 
 $INSTALL awscli \
          bind-utils \
@@ -21,7 +21,7 @@ $INSTALL awscli \
          git \
          kde-l10n-Chinese \
          make \
-         nodejs-10.15.0-1nodesource \
+         nodejs \
          nmap \
          rpm-build \
          tcpdump \
