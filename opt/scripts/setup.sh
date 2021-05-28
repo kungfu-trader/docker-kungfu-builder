@@ -18,7 +18,7 @@ $INSTALL awscli \
          bind-utils \
          cmake3 \
          devtoolset-9 \
-         git \
+         rh-git218 \
          kde-l10n-Chinese \
          make \
          nodejs \
