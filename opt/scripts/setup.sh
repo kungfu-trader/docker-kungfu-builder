@@ -38,12 +38,6 @@ $INSTALL awscli \
 $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 
-echo "source /opt/rh/devtoolset-9/enable" >> /etc/profile
-echo "source /opt/rh/rh-git218/enable" >> /etc/profile
-
-echo "source /opt/rh/devtoolset-9/enable" >> /etc/bashrc
-echo "source /opt/rh/rh-git218/enable" >> /etc/bashrc
-
 source /opt/rh/devtoolset-9/enable
 source /opt/rh/rh-git218/enable
 
