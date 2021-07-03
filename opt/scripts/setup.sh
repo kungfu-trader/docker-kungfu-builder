@@ -38,7 +38,7 @@ $INSTALL awscli \
 
 curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
 
-yarn add -g lerna
+yarn add -g lerna@4.0.0
 
 source /opt/rh/devtoolset-9/enable
 source /opt/rh/rh-git218/enable
