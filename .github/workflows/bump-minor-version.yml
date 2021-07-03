@@ -1,0 +1,20 @@
+name: Admin - Bump Minor Version
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  bump:
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Bump Version
+        if: ${{ github.event.pull_request.merged }}
+        uses: kungfu-trader/action-bump-version@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

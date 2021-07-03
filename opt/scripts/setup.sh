@@ -12,7 +12,8 @@ $INSTALL centos-release-scl
 
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
-curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
+$REINSTALL glibc-common
+localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 
 $INSTALL awscli \
          bind-utils \
@@ -35,8 +36,9 @@ $INSTALL awscli \
          xz-devel \
          zlib-devel
 
-$REINSTALL glibc-common
-localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
+curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
+
+yarn add -g lerna
 
 source /opt/rh/devtoolset-9/enable
 source /opt/rh/rh-git218/enable
