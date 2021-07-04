@@ -2,18 +2,16 @@
 
 set -e
 
-PYTHON_VERSION="3.7.10"
+PYTHON_VERSION="3.7.11"
 
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
-$INSTALL http://repo.okay.com.mx/centos/7/x86_64/release/okay-release-1-1.noarch.rpm
 $INSTALL centos-release-scl
-
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
-$REINSTALL glibc-common
-localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
+curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
+curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
 
 $INSTALL awscli \
          bind-utils \
@@ -34,14 +32,16 @@ $INSTALL awscli \
          readline-devel \
          sqlite-devel \
          xz-devel \
+         yarn \
          zlib-devel
-
-curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
-
-yarn add -g lerna@4.0.0
 
 source /opt/rh/devtoolset-9/enable
 source /opt/rh/rh-git218/enable
+
+$REINSTALL glibc-common
+localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
+
+npm install -g lerna@4.0.0
 
 mkdir /tmp/code
 cd /tmp/code
@@ -53,9 +53,8 @@ make install
 cd /
 rm -rf /tmp/code
 
-pip3 install pipenv==2020.11.15
-
-npm install -g yarn
+pip3 install --upgrade pip
+pip3 install pipenv==2021.5.29
 
 ln -s /usr/bin/cmake3 /usr/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
