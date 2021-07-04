@@ -42,6 +42,14 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
+      - name: Show tags
+        run: |
+          echo show tags
+          echo bump-version: [${{ steps.bump-version.tags }}]
+          echo docker-meta: [${{ steps.docker-meta.outputs.tags }}]
+          echo labels: [${{ steps.docker-meta.outputs.labels }}]
+          echo done
+
       - name: Build and Push
         id: docker-build
         uses: docker/build-push-action@v2
