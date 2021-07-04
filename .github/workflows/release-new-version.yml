@@ -45,7 +45,7 @@ jobs:
       - name: Show tags
         run: |
           echo show tags
-          echo bump-version: [${{ steps.bump-version.tags }}]
+          echo bump-version: [${{ steps.bump-version.outputs.tags }}]
           echo docker-meta: [${{ steps.docker-meta.outputs.tags }}]
           echo labels: [${{ steps.docker-meta.outputs.labels }}]
           echo done
@@ -55,7 +55,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: latest, ${{ steps.bump-version.tags }}, ${{ steps.docker-meta.outputs.tags }}
+          tags: latest, ${{ steps.bump-version.outputs.tags }}, ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
 
       - name: Image digest
