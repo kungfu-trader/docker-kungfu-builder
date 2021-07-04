@@ -44,11 +44,8 @@ jobs:
 
       - name: Show tags
         run: |
-          echo show tags
-          echo bump-version: [${{ steps.bump-version.outputs.tags }}]
-          echo docker-meta: [${{ steps.docker-meta.outputs.tags }}]
-          echo labels: [${{ steps.docker-meta.outputs.labels }}]
-          echo done
+          echo bump-version: ${{ steps.bump-version.outputs.tags }}
+          echo docker-meta: ${{ steps.docker-meta.outputs.tags }}
 
       - name: Build and Push
         id: docker-build
