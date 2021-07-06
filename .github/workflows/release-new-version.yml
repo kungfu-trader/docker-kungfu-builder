@@ -54,7 +54,6 @@ jobs:
         run: echo ${{ steps.docker-build.outputs.digest }}
 
       - name: Push New Version To GitHub
-        if: ${{ github.event.pull_request.merged }}
         uses: kungfu-trader/action-bump-version@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

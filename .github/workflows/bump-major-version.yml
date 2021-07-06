@@ -9,13 +9,13 @@ on:
 
 jobs:
   bump:
+    if: ${{ github.event.inputs.confirm  == 'confirm' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Bump Version
-        if: ${{ github.event.inputs.confirm  == 'confirm' }}
         uses: kungfu-trader/action-bump-version@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
