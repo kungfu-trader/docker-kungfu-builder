@@ -19,5 +19,3 @@ jobs:
         uses: kungfu-trader/action-bump-version@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          head-ref: main
-          base-ref: main
