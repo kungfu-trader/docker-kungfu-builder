@@ -56,4 +56,5 @@ rm -rf /tmp/code
 pip3 install --upgrade pip
 pip3 install pipenv==2021.5.29
 
+ln -s /usr/bin/cmake3 /usr/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
