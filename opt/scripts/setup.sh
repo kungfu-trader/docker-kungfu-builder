@@ -17,7 +17,7 @@ $INSTALL awscli \
          bind-utils \
          cmake3 \
          devtoolset-9 \
-         rh-git218 \
+         rh-git227 \
          kde-l10n-Chinese \
          make \
          nodejs \
@@ -36,7 +36,7 @@ $INSTALL awscli \
          zlib-devel
 
 source /opt/rh/devtoolset-9/enable
-source /opt/rh/rh-git218/enable
+source /opt/rh/rh-git227/enable
 
 $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
