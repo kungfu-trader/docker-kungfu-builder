@@ -2,22 +2,22 @@
 
 set -e
 
-PYTHON_VERSION="3.7.11"
+PYTHON_VERSION="3.9.7"
 
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
-$INSTALL centos-release-scl
+$INSTALL centos-release-scl epel-release
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
 curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
-curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
+curl -sSL https://rpm.nodesource.com/setup_14.x | bash -
 
 $INSTALL awscli \
          bind-utils \
          cmake3 \
          devtoolset-9 \
-         rh-git218 \
+         rh-git227 \
          kde-l10n-Chinese \
          make \
          nodejs \
@@ -36,7 +36,7 @@ $INSTALL awscli \
          zlib-devel
 
 source /opt/rh/devtoolset-9/enable
-source /opt/rh/rh-git218/enable
+source /opt/rh/rh-git227/enable
 
 $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
