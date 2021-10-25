@@ -58,3 +58,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           action: "postbuild"
+          no-publish: true
