@@ -7,7 +7,7 @@ PYTHON_VERSION="3.7.11"
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
-$INSTALL centos-release-scl
+$INSTALL centos-release-scl epel-release
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
 curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
