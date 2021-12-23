@@ -16,7 +16,7 @@ curl -sSL https://rpm.nodesource.com/setup_12.x | bash -
 $INSTALL awscli \
          bind-utils \
          cmake3 \
-         devtoolset-9 \
+         devtoolset-10 \
          rh-git218 \
          kde-l10n-Chinese \
          make \
@@ -35,7 +35,7 @@ $INSTALL awscli \
          yarn \
          zlib-devel
 
-source /opt/rh/devtoolset-9/enable
+source /opt/rh/devtoolset-10/enable
 source /opt/rh/rh-git218/enable
 
 $REINSTALL glibc-common
