@@ -2,7 +2,7 @@
 
 set -e
 
-PYTHON_VERSION="3.9.7"
+PYTHON_VERSION="3.9.10"
 
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
@@ -16,7 +16,7 @@ curl -sSL https://rpm.nodesource.com/setup_14.x | bash -
 $INSTALL awscli \
          bind-utils \
          cmake3 \
-         devtoolset-9 \
+         devtoolset-10 \
          rh-git227 \
          kde-l10n-Chinese \
          make \
@@ -35,7 +35,7 @@ $INSTALL awscli \
          yarn \
          zlib-devel
 
-source /opt/rh/devtoolset-9/enable
+source /opt/rh/devtoolset-10/enable
 source /opt/rh/rh-git227/enable
 
 $REINSTALL glibc-common
@@ -54,7 +54,7 @@ cd /
 rm -rf /tmp/code
 
 pip3 install --upgrade pip
-pip3 install pipenv==2021.5.29
+pip3 install pipenv==2022.1.8
 
 ln -s /usr/bin/cmake3 /usr/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
