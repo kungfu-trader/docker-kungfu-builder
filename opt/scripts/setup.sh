@@ -21,6 +21,8 @@ $INSTALL awscli \
          kde-l10n-Chinese \
          make \
          nodejs \
+         java-1.8.0-openjdk \
+         java-1.8.0-openjdk-devel \
          nmap \
          rpm-build \
          tcpdump \
