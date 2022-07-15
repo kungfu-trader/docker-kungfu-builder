@@ -23,6 +23,7 @@ $INSTALL awscli \
          nodejs \
          java-1.8.0-openjdk \
          java-1.8.0-openjdk-devel \
+         patchelf \
          nmap \
          rpm-build \
          tcpdump \
