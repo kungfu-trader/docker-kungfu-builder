@@ -15,6 +15,7 @@ curl -sSL https://rpm.nodesource.com/setup_14.x | bash -
 
 $INSTALL awscli \
          bind-utils \
+         ccache \
          cmake3 \
          devtoolset-10 \
          rh-git227 \
