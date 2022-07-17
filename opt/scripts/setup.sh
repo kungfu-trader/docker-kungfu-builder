@@ -15,6 +15,7 @@ curl -sSL https://rpm.nodesource.com/setup_14.x | bash -
 
 $INSTALL awscli \
          bind-utils \
+         ccache \
          cmake3 \
          devtoolset-10 \
          rh-git227 \
@@ -23,6 +24,7 @@ $INSTALL awscli \
          nodejs \
          java-1.8.0-openjdk \
          java-1.8.0-openjdk-devel \
+         patchelf \
          nmap \
          rpm-build \
          tcpdump \
