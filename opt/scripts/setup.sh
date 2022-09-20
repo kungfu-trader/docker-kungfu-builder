@@ -44,6 +44,7 @@ source /opt/rh/rh-git227/enable
 
 $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
+localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 
 npm install --location=global npm
 npm install --location=global yarn@^1
