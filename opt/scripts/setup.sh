@@ -69,6 +69,7 @@ $PIP_INSTALL --upgrade pip
 $PIP_INSTALL black~=22.3.0 \
              clang-format \
              pipenv==2022.8.15 \
+             pipx==1.1.0
 
 pipx install poetry==1.2.2
 pipx install black==22.3.0
