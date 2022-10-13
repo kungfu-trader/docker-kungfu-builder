@@ -73,3 +73,4 @@ $PIP_INSTALL black~=22.3.0 \
 
 pipx install poetry==1.2.2
 pipx install black==22.3.0
+pipx ensurepath
