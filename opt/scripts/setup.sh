@@ -2,7 +2,7 @@
 
 set -e
 
-PYTHON_VERSION="3.9.13"
+PYTHON_VERSION="3.9.15"
 PIP_INSTALL="pip3 install"
 
 INSTALL="yum -y install"
@@ -48,7 +48,10 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 
 npm install --location=global npm
 npm install --location=global yarn@^1
-npm install --location=global lerna@^5
+
+yarn global add lerna@^5
+yarn global add wsrun@^5
+yarn global add prettier@~2.7
 
 mkdir /tmp/code
 cd /tmp/code
@@ -66,6 +69,9 @@ ln -s /usr/local/bin/python3 /usr/local/bin/python
 $PIP_INSTALL --upgrade pip
 $PIP_INSTALL black~=22.3.0 \
              clang-format \
-             pipx \
-             pipenv \
-             poetry
+             pipenv==2022.8.15 \
+             pipx==1.1.0
+
+pipx install poetry==1.2.2
+pipx install black==22.3.0
+pipx ensurepath
