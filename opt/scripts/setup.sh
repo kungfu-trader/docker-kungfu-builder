@@ -49,8 +49,9 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 
 npm install --location=global npm
 npm install --location=global yarn@^1
-npm install --location=global lerna@^5
-npm install --location=global wsrun@^5
+
+yarn global add lerna@^5
+yarn global add wsrun@^5
 
 mkdir /tmp/code
 cd /tmp/code
