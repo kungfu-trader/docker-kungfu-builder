@@ -52,6 +52,7 @@ npm install --location=global yarn@^1
 
 yarn global add lerna@^5
 yarn global add wsrun@^5
+yarn global add prettier@~2.7
 
 mkdir /tmp/code
 cd /tmp/code
