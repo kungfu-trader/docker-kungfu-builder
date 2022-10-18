@@ -5,6 +5,9 @@ set -e
 PYTHON_VERSION="3.9.15"
 PIP_INSTALL="pip3 install"
 
+NPM_INSTALL="npm install --location=global"
+YARN_INSTALL="yarn global add"
+
 INSTALL="yum -y install"
 REINSTALL="yum -y reinstall"
 
@@ -46,12 +49,17 @@ $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 
-npm install --location=global npm
-npm install --location=global yarn@^1
+# use npm to install global dependencies
+$NPM_INSTALL glob@^8
+$NPM_INSTALL yarn@^1
 
-yarn global add lerna@^5
-yarn global add wsrun@^5
-yarn global add prettier@~2.7
+# link system node_modules folder to find global deps
+ln -s /usr/lib/node_modules /node_modules
+
+# use yarn to install executables
+$YARN_INSTALL lerna@^5
+$YARN_INSTALL wsrun@^5
+$YARN_INSTALL prettier@~2.7
 
 mkdir /tmp/code
 cd /tmp/code
