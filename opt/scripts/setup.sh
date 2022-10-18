@@ -47,10 +47,9 @@ $REINSTALL glibc-common
 localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
 localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 
-npm install --location=global npm
+npm install --location=global glob@^8
 npm install --location=global yarn@^1
 
-yarn global add glob@^8
 yarn global add lerna@^5
 yarn global add wsrun@^5
 yarn global add prettier@~2.7
