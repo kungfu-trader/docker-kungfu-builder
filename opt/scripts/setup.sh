@@ -53,6 +53,9 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 $NPM_INSTALL glob@^8
 $NPM_INSTALL yarn@^1
 
+# link system node_modules folder to find global deps
+ln -s /usr/lib/node_modules /node_modules
+
 # use yarn to install executables
 $YARN_INSTALL lerna@^5
 $YARN_INSTALL wsrun@^5
