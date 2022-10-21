@@ -30,6 +30,7 @@ $INSTALL awscli \
          java-1.8.0-openjdk-devel \
          patchelf \
          nmap \
+         ninja-build \
          rpm-build \
          tcpdump \
          traceroute \
