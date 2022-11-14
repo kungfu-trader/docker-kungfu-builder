@@ -28,9 +28,9 @@ $INSTALL awscli \
          nodejs \
          java-1.8.0-openjdk \
          java-1.8.0-openjdk-devel \
+         rh-maven35-maven \
          patchelf \
          nmap \
-         ninja-build \
          rpm-build \
          tcpdump \
          traceroute \
