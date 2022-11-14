@@ -74,8 +74,6 @@ rm -rf /tmp/code
 
 ln -s /usr/bin/cmake3 /usr/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
-ln -s /opt/rh/rh-maven35/root/bin/build-classpath /usr/local/bin/build-classpath
-ln -s /opt/rh/rh-maven35/root/bin/mvn /usr/local/bin/mvn
 
 $PIP_INSTALL --upgrade pip
 $PIP_INSTALL black~=22.3.0 \
