@@ -78,9 +78,10 @@ ln -s /usr/local/bin/python3 /usr/local/bin/python
 
 $PIP_INSTALL --upgrade pip setuptools
 $PIP_INSTALL pipx==1.1.0
-pipx ensurepath
 
 $PIPX_INSTALL black==22.3.0
 $PIPX_INSTALL clang-format==15.0.7
 $PIPX_INSTALL pipenv==2022.8.15
 $PIPX_INSTALL poetry==1.2.2
+
+pipx ensurepath
