@@ -1,6 +1,6 @@
 {
   "name": "@kungfu-trader/docker-kungfu-builder",
-  "version": "1.2.3-alpha.2",
+  "version": "1.2.4-alpha.0",
   "repository": "https://github.com/kungfu-trader/docker-kungfu-builder",
   "author": "Keren Dong",
   "license": "Apache-2.0",
