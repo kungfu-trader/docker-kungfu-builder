@@ -4,6 +4,7 @@ set -e
 
 PYTHON_VERSION="3.9.15"
 PIP_INSTALL="pip3 install"
+PIPX_INSTALL="pipx install"
 
 NPM_INSTALL="npm install --location=global"
 YARN_INSTALL="yarn global add"
@@ -75,12 +76,12 @@ rm -rf /tmp/code
 ln -s /usr/bin/cmake3 /usr/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
 
-$PIP_INSTALL --upgrade pip
-$PIP_INSTALL black~=22.3.0 \
-             clang-format \
-             pipenv==2022.8.15 \
-             pipx==1.1.0
+$PIP_INSTALL --upgrade pip setuptools
+$PIP_INSTALL pipx==1.1.0
 
-pipx install poetry==1.2.2
-pipx install black==22.3.0
+$PIPX_INSTALL black==22.3.0
+$PIPX_INSTALL clang-format==15.0.7
+$PIPX_INSTALL pipenv==2022.8.15
+$PIPX_INSTALL poetry==1.2.2
+
 pipx ensurepath
