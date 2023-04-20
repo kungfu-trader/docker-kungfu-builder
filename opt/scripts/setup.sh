@@ -15,6 +15,8 @@ REINSTALL="yum -y reinstall"
 $INSTALL centos-release-scl epel-release
 yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 
+$INSTALL https://repo.ius.io/ius-release-el7.rpm
+
 curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
 curl -sSL https://rpm.nodesource.com/setup_16.x | bash -
 
@@ -42,6 +44,7 @@ $INSTALL awscli \
          readline-devel \
          sqlite-devel \
          xz-devel \
+         yum-utils \
          zlib-devel
 
 source /opt/rh/devtoolset-11/enable
