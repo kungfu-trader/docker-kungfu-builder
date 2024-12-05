@@ -24,15 +24,17 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 
+# 添加 GCC 11 的 PPA 源
+add-apt-repository ppa:ubuntu-toolchain-r/test -y
 $UPDATE
 
-# 安装必要的软件包
+# 安装必要的软件包，包括 GCC 11
 $INSTALL awscli \
          dnsutils \
          ccache \
          cmake \
-         g++ \
-         gcc \
+         g++-11 \
+         gcc-11 \
          git \
          language-pack-zh-hans \
          make \
@@ -54,6 +56,10 @@ $INSTALL awscli \
          liblzma-dev \
          zlib1g-dev
 
+# 设置默认 GCC 和 G++ 为版本 11
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+
 # 设置语言环境
 locale-gen zh_CN.GB18030
 locale-gen zh_CN.UTF-8
@@ -71,13 +77,15 @@ $YARN_INSTALL lerna@^5
 $YARN_INSTALL wsrun@^5
 $YARN_INSTALL prettier@~2.7
 
-# 构建并安装指定版本的 Python
+# 构建并安装指定版本的 Python，确保使用 GCC 11
 mkdir /tmp/code
 cd /tmp/code
 curl -sSLO https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz
 tar -xf Python-$PYTHON_VERSION.tar.xz
 cd Python-$PYTHON_VERSION
-./configure --with-ensurepip=install --enable-optimizations --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+CC=gcc-11 CXX=g++-11 ./configure --with-ensurepip=install --enable-optimizations --enable-shared \
+    LDFLAGS="-Wl,-rpath /usr/local/lib" \
+    --with-default-libstdcxx-abi=gcc4-compatible
 make install
 cd /
 rm -rf /tmp/code
