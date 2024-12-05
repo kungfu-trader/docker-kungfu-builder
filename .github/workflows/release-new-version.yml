@@ -8,11 +8,18 @@ on:
       - release/v*/v*
 
 jobs:
+  # release:
+  #   uses: kungfu-trader/workflows/.github/workflows/.release-docker.yml@v1.2-alpha
+  #   with:
+  #     image-name: kungfutrader/kungfu-builder-centos
+  #   secrets:
+  #     GITHUB_PUSH_TOKEN: ${{ secrets.KUNGFU_GITHUB_TOKEN }}
+  #     DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+  #     DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
   release:
-    uses: kungfu-trader/workflows/.github/workflows/.release-docker.yml@v1.2-alpha
-    with:
-      image-name: kungfutrader/kungfu-builder-centos
-    secrets:
-      GITHUB_PUSH_TOKEN: ${{ secrets.KUNGFU_GITHUB_TOKEN }}
-      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-      DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    if: ${{ github.event.pull_request.merged }}
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
