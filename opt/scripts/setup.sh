@@ -72,11 +72,11 @@ cd build
 
 # 编译并安装GCC
 make -j$(nproc)
-sudo make install
+make install
 
 # 设置默认GCC和G++版本为手动编译的版本
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/local/gcc-$GCC_VERSION/bin/gcc 100
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/local/gcc-$GCC_VERSION/bin/g++ 100
+update-alternatives --install /usr/bin/gcc gcc /usr/local/gcc-$GCC_VERSION/bin/gcc 100
+update-alternatives --install /usr/bin/g++ g++ /usr/local/gcc-$GCC_VERSION/bin/g++ 100
 
 # 确认gcc和g++版本
 gcc --version
