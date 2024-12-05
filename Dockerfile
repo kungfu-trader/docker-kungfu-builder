@@ -1,5 +1,6 @@
-FROM rockylinux:8.9.20231119
+FROM centos:7
 COPY opt /opt
+
 
 RUN bash /opt/scripts/setup.sh
 ENV USE_HARD_LINKS=false \
