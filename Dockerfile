@@ -1,9 +1,5 @@
-FROM centos:7
+FROM rockylinux:8.9.20231119
 COPY opt /opt
-
-RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.cloud.tencent.com/repo/centos7_base.repo && \
-    yum clean all && \
-    yum makecache
 
 RUN bash /opt/scripts/setup.sh
 ENV USE_HARD_LINKS=false \
