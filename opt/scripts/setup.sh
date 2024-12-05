@@ -18,7 +18,7 @@ yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
 $INSTALL https://repo.ius.io/ius-release-el7.rpm
 
 curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
-curl -sSL https://rpm.nodesource.com/setup_16.x | bash -
+curl -sSL https://rpm.nodesource.com/setup_20.x | bash -
 
 $INSTALL awscli \
          bind-utils \
