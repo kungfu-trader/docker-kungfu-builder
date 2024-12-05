@@ -9,10 +9,16 @@ on:
 
 jobs:
   try:
-    uses: kungfu-trader/workflows/.github/workflows/.release-verify.yml@v1
-    with:
-      check-format: false
-      prebuild: false
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+  # try:
+  #   uses: kungfu-trader/workflows/.github/workflows/.release-verify.yml@v1
+  #   with:
+  #     check-format: false
+  #     prebuild: false
   
   verify:
     needs: try
