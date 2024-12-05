@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    uses: kungfu-trader/workflows/.github/workflows/.release-docker.yml@v1
+    uses: kungfu-trader/workflows/.github/workflows/.release-docker.yml@v1.2-alpha
     with:
       image-name: kungfutrader/kungfu-builder-centos
     secrets:
