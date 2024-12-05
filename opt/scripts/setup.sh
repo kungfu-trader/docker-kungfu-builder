@@ -24,17 +24,11 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.lis
 
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 
-# 添加 GCC 11 的 PPA 源
-add-apt-repository ppa:ubuntu-toolchain-r/test -y
-$UPDATE
-
-# 安装必要的软件包，包括 GCC 11
+# 安装必要的软件包（不包括gcc，因为我们将手动编译）
 $INSTALL awscli \
          dnsutils \
          ccache \
          cmake \
-         g++-11 \
-         gcc-11 \
          git \
          language-pack-zh-hans \
          make \
@@ -56,45 +50,74 @@ $INSTALL awscli \
          liblzma-dev \
          zlib1g-dev
 
-# 设置默认 GCC 和 G++ 为版本 11
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
-update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+# 安装编译gcc所需的依赖
+$INSTALL libgmp-dev libmpfr-dev libmpc-dev wget
+
+# 下载并解压GCC源代码
+GCC_VERSION="11.3.0"
+cd /tmp
+wget http://ftp.gnu.org/gnu/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz
+tar -xvzf gcc-$GCC_VERSION.tar.gz
+cd gcc-$GCC_VERSION
+
+# 创建一个新的build目录并进入
+mkdir build
+cd build
+
+# 配置GCC编译选项
+../configure --prefix=/usr/local/gcc-$GCC_VERSION \
+             --enable-languages=c,c++ \
+             --disable-multilib \
+             --with-default-libstdcxx-abi=gcc4-compatible
+
+# 编译并安装GCC
+make -j$(nproc)
+sudo make install
+
+# 设置默认GCC和G++版本为手动编译的版本
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/local/gcc-$GCC_VERSION/bin/gcc 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/local/gcc-$GCC_VERSION/bin/g++ 100
+
+# 确认gcc和g++版本
+gcc --version
+g++ --version
+gcc -v
 
 # 设置语言环境
 locale-gen zh_CN.GB18030
 locale-gen zh_CN.UTF-8
 update-locale LANG=zh_CN.UTF-8
 
-# 使用 npm 安装全局依赖
+# 使用npm安装全局依赖
 $NPM_INSTALL glob@^8
 $NPM_INSTALL yarn@^1
 
 # 创建符号链接，便于全局依赖的查找
 ln -s /usr/lib/node_modules /node_modules
 
-# 使用 yarn 安装工具
+# 使用yarn安装工具
 $YARN_INSTALL lerna@^5
 $YARN_INSTALL wsrun@^5
 $YARN_INSTALL prettier@~2.7
 
-# 构建并安装指定版本的 Python，确保使用 GCC 11
+# 构建并安装指定版本的Python，确保使用gcc-11
 mkdir /tmp/code
 cd /tmp/code
 curl -sSLO https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz
 tar -xf Python-$PYTHON_VERSION.tar.xz
 cd Python-$PYTHON_VERSION
-CC=gcc-11 CXX=g++-11 ./configure --with-ensurepip=install --enable-optimizations --enable-shared \
+CC=/usr/local/gcc-$GCC_VERSION/bin/gcc CXX=/usr/local/gcc-$GCC_VERSION/bin/g++ ./configure --with-ensurepip=install --enable-optimizations --enable-shared \
     LDFLAGS="-Wl,-rpath /usr/local/lib" \
     --with-default-libstdcxx-abi=gcc4-compatible
 make install
 cd /
 rm -rf /tmp/code
 
-# 创建 Python 和 CMake 的符号链接
+# 创建Python和CMake的符号链接
 ln -s /usr/bin/cmake /usr/local/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
 
-# 安装 Python 工具
+# 安装Python工具
 $PIP_INSTALL --upgrade pip setuptools
 $PIP_INSTALL pipx==1.1.0
 
