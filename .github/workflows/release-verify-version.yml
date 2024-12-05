@@ -8,7 +8,7 @@ on:
       - main
 
 jobs:
-  release:
+  try:
     runs-on: ubuntu-22.04
 
     steps:
