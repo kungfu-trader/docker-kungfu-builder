@@ -9,63 +9,69 @@ PIPX_INSTALL="pipx install"
 NPM_INSTALL="npm install --location=global"
 YARN_INSTALL="yarn global add"
 
-INSTALL="yum -y install"
-REINSTALL="yum -y reinstall"
+INSTALL="apt-get install -y"
+UPDATE="apt-get update"
+UPGRADE="apt-get upgrade -y"
 
-$INSTALL centos-release-scl epel-release
-yum-config-manager --enable centos-sclo-rh-testing centos-sclo-sclo-testing
+# 更新软件包列表和安装基本依赖
+$UPDATE && $UPGRADE
 
-$INSTALL https://repo.ius.io/ius-release-el7.rpm
+$INSTALL software-properties-common curl locales gnupg
 
-curl -sSL https://dl.yarnpkg.com/rpm/yarn.repo -o /etc/yum.repos.d/yarn.repo
-curl -sSL https://rpm.nodesource.com/setup_20.x | bash -
+# 添加必要的第三方源
+curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+
+$UPDATE
+
+# 安装必要的软件包
 $INSTALL awscli \
-         bind-utils \
+         dnsutils \
          ccache \
-         cmake3 \
-         devtoolset-11 \
-         rh-git227 \
-         kde-l10n-Chinese \
+         cmake \
+         g++ \
+         gcc \
+         git \
+         language-pack-zh-hans \
          make \
          nodejs \
-         java-1.8.0-openjdk \
-         java-1.8.0-openjdk-devel \
-         rh-maven35-maven \
+         openjdk-8-jdk \
+         openjdk-8-jdk-headless \
+         maven \
          patchelf \
          nmap \
-         rpm-build \
+         dpkg-dev \
          tcpdump \
          traceroute \
-         xz \
-         bzip2-devel \
-         libffi-devel \
-         openssl-devel \
-         readline-devel \
-         sqlite-devel \
-         xz-devel \
-         yum-utils \
-         zlib-devel
+         xz-utils \
+         libbz2-dev \
+         libffi-dev \
+         libssl-dev \
+         libreadline-dev \
+         libsqlite3-dev \
+         liblzma-dev \
+         zlib1g-dev
 
-source /opt/rh/devtoolset-11/enable
-source /opt/rh/rh-git227/enable
+# 设置语言环境
+locale-gen zh_CN.GB18030
+locale-gen zh_CN.UTF-8
+update-locale LANG=zh_CN.UTF-8
 
-$REINSTALL glibc-common
-localedef -c -f GB18030 -i zh_CN zh_CN.GB18030
-localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
-
-# use npm to install global dependencies
+# 使用 npm 安装全局依赖
 $NPM_INSTALL glob@^8
 $NPM_INSTALL yarn@^1
 
-# link system node_modules folder to find global deps
+# 创建符号链接，便于全局依赖的查找
 ln -s /usr/lib/node_modules /node_modules
 
-# use yarn to install executables
+# 使用 yarn 安装工具
 $YARN_INSTALL lerna@^5
 $YARN_INSTALL wsrun@^5
 $YARN_INSTALL prettier@~2.7
 
+# 构建并安装指定版本的 Python
 mkdir /tmp/code
 cd /tmp/code
 curl -sSLO https://www.python.org/ftp/python/$PYTHON_VERSION/Python-$PYTHON_VERSION.tar.xz
@@ -76,9 +82,11 @@ make install
 cd /
 rm -rf /tmp/code
 
-ln -s /usr/bin/cmake3 /usr/bin/cmake
+# 创建 Python 和 CMake 的符号链接
+ln -s /usr/bin/cmake /usr/local/bin/cmake
 ln -s /usr/local/bin/python3 /usr/local/bin/python
 
+# 安装 Python 工具
 $PIP_INSTALL --upgrade pip setuptools
 $PIP_INSTALL pipx==1.1.0
 

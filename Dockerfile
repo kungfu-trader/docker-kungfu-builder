@@ -1,4 +1,4 @@
-FROM centos:7
+FROM ubuntu:20.04
 COPY opt /opt
 
 
